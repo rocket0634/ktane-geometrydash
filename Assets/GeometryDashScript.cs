@@ -1391,7 +1391,7 @@ public class GeometryDashScript : MonoBehaviour
             for (int i = 0; i < clip21.Length; i++)
             {
                 background.GetComponent<Renderer>().material.mainTexture = clip21[i];
-                yield return new WaitForSeconds(0.01385f);
+                yield return new WaitForSeconds(0.03f);
             }
         }
         else if (clip == 22)
@@ -1400,7 +1400,7 @@ public class GeometryDashScript : MonoBehaviour
             for (int i = 0; i < clip22.Length; i++)
             {
                 background.GetComponent<Renderer>().material.mainTexture = clip22[i];
-                yield return new WaitForSeconds(0.01385f);
+                yield return new WaitForSeconds(0.03f);
             }
         }
         yield return new WaitForSeconds(0.5f);
@@ -1440,7 +1440,7 @@ public class GeometryDashScript : MonoBehaviour
         for (int i = 0; i < endimg.Length; i++)
         {
             background.GetComponent<Renderer>().material.mainTexture = endimg[i];
-            yield return new WaitForSeconds(0.0139f);
+            yield return new WaitForSeconds(0.04f);
         }
         yield return new WaitForSeconds(0.5f);
         //end originally not here
