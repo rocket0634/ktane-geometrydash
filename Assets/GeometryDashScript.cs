@@ -4,9 +4,8 @@ using System.Linq;
 using UnityEngine;
 using KModkit;
 using System.Text.RegularExpressions;
-using System;
+using UnityEngine.UI;
 using UnityEngine.Video;
- using UnityEngine.UI;
 
 public class GeometryDashScript : MonoBehaviour
 {
@@ -49,6 +48,10 @@ public class GeometryDashScript : MonoBehaviour
     private bool transformC;
     private bool orbs;
     private bool pads;
+
+    //lvl clips
+    public int clip = 0;
+    public Texture[] clip22;
 
     private bool started = false;
     private bool animating = false;
@@ -191,7 +194,8 @@ public class GeometryDashScript : MonoBehaviour
 
     private void pickVideoAndStats()
     {
-        int rando = UnityEngine.Random.Range(0, 56);
+        int rando = UnityEngine.Random.Range(21, 22);
+        clip = rando + 1;
         if (rando > -1 && rando < 4)
         {
             Debug.LogFormat("[Geometry Dash #{0}] The chosen level is: Valor", moduleId);
@@ -497,7 +501,7 @@ public class GeometryDashScript : MonoBehaviour
             Debug.LogFormat("[Geometry Dash #{0}] --------------------------------------------", moduleId);
             if (rando == 18)
             {
-                player.clip = clips[18];
+                //player.clip = clips[18];
                 coin = false;
                 mirror = false;
                 speed = false;
@@ -508,7 +512,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 19)
             {
-                player.clip = clips[19];
+                //player.clip = clips[19];
                 coin = true;
                 mirror = false;
                 speed = true;
@@ -519,7 +523,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 20)
             {
-                player.clip = clips[20];
+                //player.clip = clips[20];
                 coin = false;
                 mirror = false;
                 speed = false;
@@ -530,7 +534,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 21)
             {
-                player.clip = clips[21];
+                //player.clip = clips[21];
                 coin = true;
                 mirror = false;
                 speed = false;
@@ -1364,16 +1368,34 @@ public class GeometryDashScript : MonoBehaviour
             background.GetComponent<Renderer>().material.Lerp(originalMat, startBacks[0], Mathf.Min(1, t / fadeOutTime));
             yield return null;
         }
-        player.Play();
-        yield return new WaitForSeconds(.1f);
+        //player.Play();
+        //yield return new WaitForSeconds(.1f);
+        /**
         Material originalMat2 = background.GetComponent<Renderer>().material;
         for (float t = 0.01f; t < fadeOutTime; t += Time.deltaTime)
         {
             background.GetComponent<Renderer>().material.Lerp(originalMat2, startBacks[1], Mathf.Min(1, t / fadeOutTime));
             yield return null;
         }
-        yield return new WaitForSeconds(9f);
-        player.Stop();
+        */
+        //yield return new WaitForSeconds(9f);
+        //player.Stop();
+
+        //not originally here
+        background.GetComponent<Renderer>().material = startBacks[1];
+        if (clip == 22)
+        {
+            audio.PlaySoundAtTransform("clip22", transform);
+            for (int i = 0; i < clip22.Length; i++)
+            {
+                background.GetComponent<Renderer>().material.mainTexture = clip22[i];
+                yield return new WaitForSeconds(0.01385f);
+            }
+        }
+        yield return new WaitForSeconds(0.5f);
+        background.GetComponent<Renderer>().material.mainTexture = originalMat.mainTexture;
+        //end not originally here
+
         for (int i = 0; i < 2; i++)
         {
             endTexts[i].SetActive(true);
