@@ -50,8 +50,10 @@ public class GeometryDashScript : MonoBehaviour
     private bool pads;
 
     //lvl clips
-    public int clip = 0;
+    private int clip = 0;
+    public Texture[] clip21;
     public Texture[] clip22;
+    public Texture[] endimg;
 
     private bool started = false;
     private bool animating = false;
@@ -194,7 +196,7 @@ public class GeometryDashScript : MonoBehaviour
 
     private void pickVideoAndStats()
     {
-        int rando = UnityEngine.Random.Range(21, 22);
+        int rando = UnityEngine.Random.Range(20, 22);
         clip = rando + 1;
         if (rando > -1 && rando < 4)
         {
@@ -1383,7 +1385,16 @@ public class GeometryDashScript : MonoBehaviour
 
         //not originally here
         background.GetComponent<Renderer>().material = startBacks[1];
-        if (clip == 22)
+        if (clip == 21)
+        {
+            audio.PlaySoundAtTransform("clip21", transform);
+            for (int i = 0; i < clip21.Length; i++)
+            {
+                background.GetComponent<Renderer>().material.mainTexture = clip21[i];
+                yield return new WaitForSeconds(0.01385f);
+            }
+        }
+        else if (clip == 22)
         {
             audio.PlaySoundAtTransform("clip22", transform);
             for (int i = 0; i < clip22.Length; i++)
@@ -1412,10 +1423,9 @@ public class GeometryDashScript : MonoBehaviour
     private IEnumerator end()
     {
         animating = true;
-        player.clip = clips[56];
+        //player.clip = clips[56];
         audio.PlaySoundAtTransform("endStart_02", transform);
-        yield return new WaitForSeconds(0.3f);
-        player.Play();
+        //player.Play();
         for (int i = 0; i < 2; i++)
         {
             endTexts[i].SetActive(false);
@@ -1425,8 +1435,18 @@ public class GeometryDashScript : MonoBehaviour
             icons[i].SetActive(false);
             endButtons[i].SetActive(false);
         }
-        yield return new WaitForSeconds(3.5f);
-        player.Stop();
+
+        //originally not here
+        for (int i = 0; i < endimg.Length; i++)
+        {
+            background.GetComponent<Renderer>().material.mainTexture = endimg[i];
+            yield return new WaitForSeconds(0.0139f);
+        }
+        yield return new WaitForSeconds(0.5f);
+        //end originally not here
+
+        //yield return new WaitForSeconds(3.5f);
+        //player.Stop();
         background.GetComponent<Renderer>().material = endBack;
         animating = false;
         moduleSolved = true;
