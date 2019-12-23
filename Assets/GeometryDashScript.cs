@@ -5,6 +5,7 @@ using UnityEngine;
 using KModkit;
 using System.Text.RegularExpressions;
 using UnityEngine.UI;
+using UnityEngine.Video;
 
 public class GeometryDashScript : MonoBehaviour
 {
@@ -16,8 +17,7 @@ public class GeometryDashScript : MonoBehaviour
 
     public KMSelectable[] buttons;
 
-    //public VideoPlayer player;
-    //public VideoClip[] clips;
+    public VideoPlayer player;
 
     //start menu things
     public GameObject button;
@@ -49,66 +49,6 @@ public class GeometryDashScript : MonoBehaviour
     private bool orbs;
     private bool pads;
 
-    //lvl clips
-    private int clip = 0;
-    public Texture[] clip1;
-    public Texture[] clip2;
-    public Texture[] clip3;
-    public Texture[] clip4;
-    public Texture[] clip5;
-    public Texture[] clip6;
-    public Texture[] clip7;
-    public Texture[] clip8;
-    public Texture[] clip9;
-    public Texture[] clip10;
-    public Texture[] clip11;
-    public Texture[] clip12;
-    public Texture[] clip13;
-    public Texture[] clip14;
-    public Texture[] clip15;
-    public Texture[] clip16;
-    public Texture[] clip17;
-    public Texture[] clip18;
-    public Texture[] clip19;
-    public Texture[] clip20;
-    public Texture[] clip21;
-    public Texture[] clip22;
-    public Texture[] clip23;
-    public Texture[] clip24;
-    public Texture[] clip25;
-    public Texture[] clip26;
-    public Texture[] clip27;
-    public Texture[] clip28;
-    public Texture[] clip29;
-    public Texture[] clip30;
-    public Texture[] clip31;
-    public Texture[] clip32;
-    public Texture[] clip33;
-    public Texture[] clip34;
-    public Texture[] clip35;
-    public Texture[] clip36;
-    public Texture[] clip37;
-    public Texture[] clip38;
-    public Texture[] clip39;
-    public Texture[] clip40;
-    public Texture[] clip41;
-    public Texture[] clip42;
-    public Texture[] clip43;
-    public Texture[] clip44;
-    public Texture[] clip45;
-    public Texture[] clip46;
-    public Texture[] clip47;
-    public Texture[] clip48;
-    public Texture[] clip49;
-    public Texture[] clip50;
-    public Texture[] clip51;
-    public Texture[] clip52;
-    public Texture[] clip53;
-    public Texture[] clip54;
-    public Texture[] clip55;
-    public Texture[] clip56;
-    public Texture[] endimg;
-
     private bool started = false;
     private bool animating = false;
 
@@ -130,7 +70,20 @@ public class GeometryDashScript : MonoBehaviour
             KMSelectable pressed = obj;
             pressed.OnInteract += delegate () { PressButton(pressed); return false; };
         }
+
+        //StartCoroutine(WaitForVideoClips());
     }
+
+    //Test to make sure videos load in game, uncomment this method and line above to see for yourself by building the mod and running it locally
+    /**8private IEnumerator WaitForVideoClips()
+    {
+        yield return new WaitUntil(() => VideoLoader.clips != null);
+
+        player.clip = VideoLoader.clips[0];
+        player.isLooping = true;
+        //player.GetComponent<AudioSource>().volume = 0.05f;
+        player.Play();
+    }*/
 
     void Start()
     {
@@ -248,11 +201,9 @@ public class GeometryDashScript : MonoBehaviour
         }
     }
 
-    //all aud.clip = audios[#] lines were not origianlly here
     private void pickVideoAndStats()
     {
         int rando = UnityEngine.Random.Range(0, 56);
-        clip = rando + 1;
         if (rando > -1 && rando < 4)
         {
             Debug.LogFormat("[Geometry Dash #{0}] The chosen level is: Valor", moduleId);
@@ -278,7 +229,7 @@ public class GeometryDashScript : MonoBehaviour
             Debug.LogFormat("[Geometry Dash #{0}] --------------------------------------------", moduleId);
             if (rando == 0)
             {
-                //player.clip = clips[0];
+                player.clip = VideoLoader.clips[0];
                 aud.clip = audios[0];
                 coin = false;
                 mirror = false;
@@ -290,7 +241,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 1)
             {
-                //player.clip = clips[1];
+                player.clip = VideoLoader.clips[1];
                 aud.clip = audios[1];
                 coin = false;
                 mirror = false;
@@ -302,7 +253,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 2)
             {
-                //player.clip = clips[2];
+                player.clip = VideoLoader.clips[2];
                 aud.clip = audios[2];
                 coin = false;
                 mirror = false;
@@ -314,7 +265,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 3)
             {
-                //player.clip = clips[3];
+                player.clip = VideoLoader.clips[3];
                 aud.clip = audios[3];
                 coin = false;
                 mirror = false;
@@ -337,7 +288,7 @@ public class GeometryDashScript : MonoBehaviour
             Debug.LogFormat("[Geometry Dash #{0}] --------------------------------------------", moduleId);
             if (rando == 4)
             {
-                //player.clip = clips[4];
+                player.clip = VideoLoader.clips[4];
                 aud.clip = audios[4];
                 coin = false;
                 mirror = false;
@@ -349,7 +300,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 5)
             {
-                //player.clip = clips[5];
+                player.clip = VideoLoader.clips[5];
                 aud.clip = audios[5];
                 coin = false;
                 mirror = false;
@@ -361,7 +312,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 6)
             {
-                //player.clip = clips[6];
+                player.clip = VideoLoader.clips[6];
                 aud.clip = audios[6];
                 coin = false;
                 mirror = false;
@@ -373,7 +324,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 7)
             {
-                //player.clip = clips[7];
+                player.clip = VideoLoader.clips[7];
                 aud.clip = audios[7];
                 coin = false;
                 mirror = false;
@@ -396,7 +347,7 @@ public class GeometryDashScript : MonoBehaviour
             Debug.LogFormat("[Geometry Dash #{0}] --------------------------------------------", moduleId);
             if (rando == 8)
             {
-                //player.clip = clips[8];
+                player.clip = VideoLoader.clips[8];
                 aud.clip = audios[8];
                 coin = false;
                 mirror = false;
@@ -408,7 +359,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 9)
             {
-                //player.clip = clips[9];
+                player.clip = VideoLoader.clips[9];
                 aud.clip = audios[9];
                 coin = true;
                 mirror = false;
@@ -420,7 +371,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 10)
             {
-                //player.clip = clips[10];
+                player.clip = VideoLoader.clips[10];
                 aud.clip = audios[10];
                 coin = true;
                 mirror = false;
@@ -455,7 +406,7 @@ public class GeometryDashScript : MonoBehaviour
             Debug.LogFormat("[Geometry Dash #{0}] --------------------------------------------", moduleId);
             if (rando == 11)
             {
-                //player.clip = clips[11];
+                player.clip = VideoLoader.clips[11];
                 aud.clip = audios[11];
                 coin = false;
                 mirror = false;
@@ -467,7 +418,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 12)
             {
-                //player.clip = clips[12];
+                player.clip = VideoLoader.clips[12];
                 aud.clip = audios[12];
                 coin = false;
                 mirror = false;
@@ -479,7 +430,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 13)
             {
-                //player.clip = clips[13];
+                player.clip = VideoLoader.clips[13];
                 aud.clip = audios[13];
                 coin = false;
                 mirror = false;
@@ -491,7 +442,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 14)
             {
-                //player.clip = clips[14];
+                player.clip = VideoLoader.clips[14];
                 aud.clip = audios[14];
                 coin = false;
                 mirror = false;
@@ -514,7 +465,7 @@ public class GeometryDashScript : MonoBehaviour
             Debug.LogFormat("[Geometry Dash #{0}] --------------------------------------------", moduleId);
             if (rando == 15)
             {
-                //player.clip = clips[15];
+                player.clip = VideoLoader.clips[15];
                 aud.clip = audios[15];
                 coin = false;
                 mirror = false;
@@ -526,7 +477,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 16)
             {
-                //player.clip = clips[16];
+                player.clip = VideoLoader.clips[16];
                 aud.clip = audios[16];
                 coin = false;
                 mirror = false;
@@ -538,7 +489,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 17)
             {
-                //player.clip = clips[17];
+                player.clip = VideoLoader.clips[17];
                 aud.clip = audios[17];
                 coin = false;
                 mirror = false;
@@ -576,7 +527,7 @@ public class GeometryDashScript : MonoBehaviour
             Debug.LogFormat("[Geometry Dash #{0}] --------------------------------------------", moduleId);
             if (rando == 18)
             {
-                //player.clip = clips[18];
+                player.clip = VideoLoader.clips[18];
                 aud.clip = audios[18];
                 coin = false;
                 mirror = false;
@@ -588,7 +539,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 19)
             {
-                //player.clip = clips[19];
+                player.clip = VideoLoader.clips[19];
                 aud.clip = audios[19];
                 coin = true;
                 mirror = false;
@@ -600,7 +551,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 20)
             {
-                //player.clip = clips[20];
+                player.clip = VideoLoader.clips[20];
                 aud.clip = audios[20];
                 coin = false;
                 mirror = false;
@@ -612,7 +563,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 21)
             {
-                //player.clip = clips[21];
+                player.clip = VideoLoader.clips[21];
                 aud.clip = audios[21];
                 coin = true;
                 mirror = false;
@@ -635,7 +586,7 @@ public class GeometryDashScript : MonoBehaviour
             Debug.LogFormat("[Geometry Dash #{0}] --------------------------------------------", moduleId);
             if (rando == 22)
             {
-                //player.clip = clips[22];
+                player.clip = VideoLoader.clips[22];
                 aud.clip = audios[22];
                 coin = true;
                 mirror = false;
@@ -647,7 +598,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 23)
             {
-                //player.clip = clips[23];
+                player.clip = VideoLoader.clips[23];
                 aud.clip = audios[23];
                 coin = false;
                 mirror = true;
@@ -659,7 +610,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 24)
             {
-                //player.clip = clips[24];
+                player.clip = VideoLoader.clips[24];
                 aud.clip = audios[24];
                 coin = false;
                 mirror = true;
@@ -691,7 +642,7 @@ public class GeometryDashScript : MonoBehaviour
             Debug.LogFormat("[Geometry Dash #{0}] --------------------------------------------", moduleId);
             if (rando == 25)
             {
-                //player.clip = clips[25];
+                player.clip = VideoLoader.clips[25];
                 aud.clip = audios[25];
                 coin = false;
                 mirror = false;
@@ -703,7 +654,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 26)
             {
-                //player.clip = clips[26];
+                player.clip = VideoLoader.clips[26];
                 aud.clip = audios[26];
                 coin = false;
                 mirror = false;
@@ -715,7 +666,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 27)
             {
-                //player.clip = clips[27];
+                player.clip = VideoLoader.clips[27];
                 aud.clip = audios[27];
                 coin = false;
                 mirror = false;
@@ -727,7 +678,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 28)
             {
-                //player.clip = clips[28];
+                player.clip = VideoLoader.clips[28];
                 aud.clip = audios[28];
                 coin = false;
                 mirror = false;
@@ -750,7 +701,7 @@ public class GeometryDashScript : MonoBehaviour
             Debug.LogFormat("[Geometry Dash #{0}] --------------------------------------------", moduleId);
             if (rando == 29)
             {
-                //player.clip = clips[29];
+                player.clip = VideoLoader.clips[29];
                 aud.clip = audios[29];
                 coin = true;
                 mirror = false;
@@ -762,7 +713,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 30)
             {
-                //player.clip = clips[30];
+                player.clip = VideoLoader.clips[30];
                 aud.clip = audios[30];
                 coin = true;
                 mirror = true;
@@ -774,7 +725,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 31)
             {
-                //player.clip = clips[31];
+                player.clip = VideoLoader.clips[31];
                 aud.clip = audios[31];
                 coin = false;
                 mirror = false;
@@ -797,7 +748,7 @@ public class GeometryDashScript : MonoBehaviour
             Debug.LogFormat("[Geometry Dash #{0}] --------------------------------------------", moduleId);
             if (rando == 32)
             {
-                //player.clip = clips[32];
+                player.clip = VideoLoader.clips[32];
                 aud.clip = audios[32];
                 coin = true;
                 mirror = false;
@@ -809,7 +760,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 33)
             {
-                //player.clip = clips[33];
+                player.clip = VideoLoader.clips[33];
                 aud.clip = audios[33];
                 coin = true;
                 mirror = false;
@@ -821,7 +772,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 34)
             {
-                //player.clip = clips[34];
+                player.clip = VideoLoader.clips[34];
                 aud.clip = audios[34];
                 coin = false;
                 mirror = false;
@@ -844,7 +795,7 @@ public class GeometryDashScript : MonoBehaviour
             Debug.LogFormat("[Geometry Dash #{0}] --------------------------------------------", moduleId);
             if (rando == 35)
             {
-                //player.clip = clips[35];
+                player.clip = VideoLoader.clips[35];
                 aud.clip = audios[35];
                 coin = false;
                 mirror = false;
@@ -856,7 +807,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 36)
             {
-                //player.clip = clips[36];
+                player.clip = VideoLoader.clips[36];
                 aud.clip = audios[36];
                 coin = false;
                 mirror = false;
@@ -868,7 +819,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 37)
             {
-                //player.clip = clips[37];
+                player.clip = VideoLoader.clips[37];
                 aud.clip = audios[37];
                 coin = false;
                 mirror = false;
@@ -891,7 +842,7 @@ public class GeometryDashScript : MonoBehaviour
             Debug.LogFormat("[Geometry Dash #{0}] --------------------------------------------", moduleId);
             if (rando == 38)
             {
-                //player.clip = clips[38];
+                player.clip = VideoLoader.clips[38];
                 aud.clip = audios[38];
                 coin = false;
                 mirror = true;
@@ -903,7 +854,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 39)
             {
-                //player.clip = clips[39];
+                player.clip = VideoLoader.clips[39];
                 aud.clip = audios[39];
                 coin = false;
                 mirror = true;
@@ -926,7 +877,7 @@ public class GeometryDashScript : MonoBehaviour
             Debug.LogFormat("[Geometry Dash #{0}] --------------------------------------------", moduleId);
             if (rando == 40)
             {
-                //player.clip = clips[40];
+                player.clip = VideoLoader.clips[40];
                 aud.clip = audios[40];
                 coin = false;
                 mirror = false;
@@ -938,7 +889,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 41)
             {
-                //player.clip = clips[41];
+                player.clip = VideoLoader.clips[41];
                 aud.clip = audios[41];
                 coin = false;
                 mirror = false;
@@ -950,7 +901,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 42)
             {
-                //player.clip = clips[42];
+                player.clip = VideoLoader.clips[42];
                 aud.clip = audios[42];
                 coin = false;
                 mirror = false;
@@ -974,7 +925,7 @@ public class GeometryDashScript : MonoBehaviour
             Debug.LogFormat("[Geometry Dash #{0}] --------------------------------------------", moduleId);
             if (rando == 43)
             {
-                //player.clip = clips[43];
+                player.clip = VideoLoader.clips[43];
                 aud.clip = audios[43];
                 coin = true;
                 mirror = false;
@@ -986,7 +937,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 44)
             {
-                //player.clip = clips[44];
+                player.clip = VideoLoader.clips[44];
                 aud.clip = audios[44];
                 coin = true;
                 mirror = false;
@@ -998,7 +949,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 45)
             {
-                //player.clip = clips[45];
+                player.clip = VideoLoader.clips[45];
                 aud.clip = audios[45];
                 coin = true;
                 mirror = false;
@@ -1021,7 +972,7 @@ public class GeometryDashScript : MonoBehaviour
             Debug.LogFormat("[Geometry Dash #{0}] --------------------------------------------", moduleId);
             if (rando == 46)
             {
-                //player.clip = clips[46];
+                player.clip = VideoLoader.clips[46];
                 aud.clip = audios[46];
                 coin = false;
                 mirror = false;
@@ -1033,7 +984,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 47)
             {
-                //player.clip = clips[47];
+                player.clip = VideoLoader.clips[47];
                 aud.clip = audios[47];
                 coin = false;
                 mirror = true;
@@ -1045,7 +996,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 48)
             {
-                //player.clip = clips[48];
+                player.clip = VideoLoader.clips[48];
                 aud.clip = audios[48];
                 coin = false;
                 mirror = false;
@@ -1068,7 +1019,7 @@ public class GeometryDashScript : MonoBehaviour
             Debug.LogFormat("[Geometry Dash #{0}] --------------------------------------------", moduleId);
             if (rando == 49)
             {
-                //player.clip = clips[49];
+                player.clip = VideoLoader.clips[49];
                 aud.clip = audios[49];
                 coin = true;
                 mirror = false;
@@ -1080,7 +1031,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 50)
             {
-                //player.clip = clips[50];
+                player.clip = VideoLoader.clips[50];
                 aud.clip = audios[50];
                 coin = false;
                 mirror = false;
@@ -1092,7 +1043,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 51)
             {
-                //player.clip = clips[51];
+                player.clip = VideoLoader.clips[51];
                 aud.clip = audios[51];
                 coin = true;
                 mirror = false;
@@ -1115,7 +1066,7 @@ public class GeometryDashScript : MonoBehaviour
             Debug.LogFormat("[Geometry Dash #{0}] --------------------------------------------", moduleId);
             if (rando == 52)
             {
-                //player.clip = clips[52];
+                player.clip = VideoLoader.clips[52];
                 aud.clip = audios[52];
                 coin = false;
                 mirror = false;
@@ -1127,7 +1078,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 53)
             {
-                //player.clip = clips[53];
+                player.clip = VideoLoader.clips[53];
                 aud.clip = audios[53];
                 coin = false;
                 mirror = false;
@@ -1139,7 +1090,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 54)
             {
-                //player.clip = clips[54];
+                player.clip = VideoLoader.clips[54];
                 aud.clip = audios[54];
                 coin = false;
                 mirror = false;
@@ -1151,7 +1102,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 55)
             {
-                //player.clip = clips[55];
+                player.clip = VideoLoader.clips[55];
                 aud.clip = audios[55];
                 coin = false;
                 mirror = false;
@@ -1368,7 +1319,7 @@ public class GeometryDashScript : MonoBehaviour
                 }
             }
             newNum -= (startingNum - ct);
-            Debug.LogFormat("[Geometry Dash #{0}] The difference of the starting number and the number of letters in the level's song creator is: {1}, which subtracted from the number is: {2}", moduleId, startingNum - ct, newNum);
+            Debug.LogFormat("[Geometry Dash #{0}] The starting number minus the number of letters in the level's song creator is: {1}, which subtracted from the number is: {2}", moduleId, startingNum - ct, newNum);
         }
         correctCubeIndex = (newNum % 20) + 1;
         Debug.LogFormat("[Geometry Dash #{0}] Final Calculation: {1} % 20 + 1 = {2}", moduleId, newNum, correctCubeIndex);
@@ -1481,475 +1432,17 @@ public class GeometryDashScript : MonoBehaviour
             background.GetComponent<Renderer>().material.Lerp(originalMat, startBacks[0], Mathf.Min(1, t / fadeOutTime));
             yield return null;
         }
-        //player.Play();
-        //yield return new WaitForSeconds(.1f);
-        /**
+        player.Play();
+        yield return new WaitForSeconds(.1f);
+        aud.Play();
         Material originalMat2 = background.GetComponent<Renderer>().material;
         for (float t = 0.01f; t < fadeOutTime; t += Time.deltaTime)
         {
             background.GetComponent<Renderer>().material.Lerp(originalMat2, startBacks[1], Mathf.Min(1, t / fadeOutTime));
             yield return null;
         }
-        */
-        //yield return new WaitForSeconds(9f);
-        //player.Stop();
-
-        //not originally here
-        background.GetComponent<Renderer>().material = startBacks[1];
-        aud.Play();
-        if (clip == 1)
-        {
-            for (int i = 0; i < clip1.Length; i++)
-            {
-                background.GetComponent<Renderer>().material.mainTexture = clip1[i];
-                yield return new WaitForSeconds(0.03f);
-            }
-        }
-        else if (clip == 2)
-        {
-            for (int i = 0; i < clip2.Length; i++)
-            {
-                background.GetComponent<Renderer>().material.mainTexture = clip2[i];
-                yield return new WaitForSeconds(0.03f);
-            }
-        }
-        else if (clip == 3)
-        {
-            for (int i = 0; i < clip3.Length; i++)
-            {
-                background.GetComponent<Renderer>().material.mainTexture = clip3[i];
-                yield return new WaitForSeconds(0.03f);
-            }
-        }
-        else if (clip == 4)
-        {
-            for (int i = 0; i < clip4.Length; i++)
-            {
-                background.GetComponent<Renderer>().material.mainTexture = clip4[i];
-                yield return new WaitForSeconds(0.03f);
-            }
-        }
-        else if (clip == 5)
-        {
-            for (int i = 0; i < clip5.Length; i++)
-            {
-                background.GetComponent<Renderer>().material.mainTexture = clip5[i];
-                yield return new WaitForSeconds(0.03f);
-            }
-        }
-        else if (clip == 6)
-        {
-            for (int i = 0; i < clip6.Length; i++)
-            {
-                background.GetComponent<Renderer>().material.mainTexture = clip6[i];
-                yield return new WaitForSeconds(0.03f);
-            }
-        }
-        else if (clip == 7)
-        {
-            for (int i = 0; i < clip7.Length; i++)
-            {
-                background.GetComponent<Renderer>().material.mainTexture = clip7[i];
-                yield return new WaitForSeconds(0.03f);
-            }
-        }
-        else if (clip == 8)
-        {
-            for (int i = 0; i < clip8.Length; i++)
-            {
-                background.GetComponent<Renderer>().material.mainTexture = clip8[i];
-                yield return new WaitForSeconds(0.03f);
-            }
-        }
-        else if (clip == 9)
-        {
-            for (int i = 0; i < clip9.Length; i++)
-            {
-                background.GetComponent<Renderer>().material.mainTexture = clip9[i];
-                yield return new WaitForSeconds(0.03f);
-            }
-        }
-        else if (clip == 10)
-        {
-            for (int i = 0; i < clip10.Length; i++)
-            {
-                background.GetComponent<Renderer>().material.mainTexture = clip10[i];
-                yield return new WaitForSeconds(0.03f);
-            }
-        }
-        else if (clip == 11)
-        {
-            for (int i = 0; i < clip11.Length; i++)
-            {
-                background.GetComponent<Renderer>().material.mainTexture = clip11[i];
-                yield return new WaitForSeconds(0.03f);
-            }
-        }
-        else if (clip == 12)
-        {
-            for (int i = 0; i < clip12.Length; i++)
-            {
-                background.GetComponent<Renderer>().material.mainTexture = clip12[i];
-                yield return new WaitForSeconds(0.03f);
-            }
-        }
-        else if (clip == 13)
-        {
-            for (int i = 0; i < clip13.Length; i++)
-            {
-                background.GetComponent<Renderer>().material.mainTexture = clip13[i];
-                yield return new WaitForSeconds(0.03f);
-            }
-        }
-        else if (clip == 14)
-        {
-            for (int i = 0; i < clip14.Length; i++)
-            {
-                background.GetComponent<Renderer>().material.mainTexture = clip14[i];
-                yield return new WaitForSeconds(0.03f);
-            }
-        }
-        else if (clip == 15)
-        {
-            for (int i = 0; i < clip15.Length; i++)
-            {
-                background.GetComponent<Renderer>().material.mainTexture = clip15[i];
-                yield return new WaitForSeconds(0.03f);
-            }
-        }
-        else if (clip == 16)
-        {
-            for (int i = 0; i < clip16.Length; i++)
-            {
-                background.GetComponent<Renderer>().material.mainTexture = clip16[i];
-                yield return new WaitForSeconds(0.03f);
-            }
-        }
-        else if (clip == 17)
-        {
-            for (int i = 0; i < clip17.Length; i++)
-            {
-                background.GetComponent<Renderer>().material.mainTexture = clip17[i];
-                yield return new WaitForSeconds(0.03f);
-            }
-        }
-        else if (clip == 18)
-        {
-            for (int i = 0; i < clip18.Length; i++)
-            {
-                background.GetComponent<Renderer>().material.mainTexture = clip18[i];
-                yield return new WaitForSeconds(0.03f);
-            }
-        }
-        else if(clip == 19)
-        {
-            for (int i = 0; i < clip19.Length; i++)
-            {
-                background.GetComponent<Renderer>().material.mainTexture = clip19[i];
-                yield return new WaitForSeconds(0.03f);
-            }
-        }
-        else if (clip == 20)
-        {
-            for (int i = 0; i < clip20.Length; i++)
-            {
-                background.GetComponent<Renderer>().material.mainTexture = clip20[i];
-                yield return new WaitForSeconds(0.03f);
-            }
-        }
-        else if (clip == 21)
-        {
-            for (int i = 0; i < clip21.Length; i++)
-            {
-                background.GetComponent<Renderer>().material.mainTexture = clip21[i];
-                yield return new WaitForSeconds(0.03f);
-            }
-        }
-        else if (clip == 22)
-        {
-            for (int i = 0; i < clip22.Length; i++)
-            {
-                background.GetComponent<Renderer>().material.mainTexture = clip22[i];
-                yield return new WaitForSeconds(0.03f);
-            }
-        }
-        else if (clip == 23)
-        {
-            for (int i = 0; i < clip23.Length; i++)
-            {
-                background.GetComponent<Renderer>().material.mainTexture = clip23[i];
-                yield return new WaitForSeconds(0.03f);
-            }
-        }
-        else if (clip == 24)
-        {
-            for (int i = 0; i < clip24.Length; i++)
-            {
-                background.GetComponent<Renderer>().material.mainTexture = clip24[i];
-                yield return new WaitForSeconds(0.03f);
-            }
-        }
-        else if (clip == 25)
-        {
-            for (int i = 0; i < clip25.Length; i++)
-            {
-                background.GetComponent<Renderer>().material.mainTexture = clip25[i];
-                yield return new WaitForSeconds(0.03f);
-            }
-        }
-        else if (clip == 26)
-        {
-            for (int i = 0; i < clip26.Length; i++)
-            {
-                background.GetComponent<Renderer>().material.mainTexture = clip26[i];
-                yield return new WaitForSeconds(0.03f);
-            }
-        }
-        else if (clip == 27)
-        {
-            for (int i = 0; i < clip27.Length; i++)
-            {
-                background.GetComponent<Renderer>().material.mainTexture = clip27[i];
-                yield return new WaitForSeconds(0.03f);
-            }
-        }
-        else if (clip == 28)
-        {
-            for (int i = 0; i < clip28.Length; i++)
-            {
-                background.GetComponent<Renderer>().material.mainTexture = clip28[i];
-                yield return new WaitForSeconds(0.03f);
-            }
-        }
-        else if (clip == 29)
-        {
-            for (int i = 0; i < clip29.Length; i++)
-            {
-                background.GetComponent<Renderer>().material.mainTexture = clip29[i];
-                yield return new WaitForSeconds(0.03f);
-            }
-        }
-        else if (clip == 30)
-        {
-            for (int i = 0; i < clip30.Length; i++)
-            {
-                background.GetComponent<Renderer>().material.mainTexture = clip30[i];
-                yield return new WaitForSeconds(0.03f);
-            }
-        }
-        else if (clip == 31)
-        {
-            for (int i = 0; i < clip31.Length; i++)
-            {
-                background.GetComponent<Renderer>().material.mainTexture = clip31[i];
-                yield return new WaitForSeconds(0.03f);
-            }
-        }
-        else if (clip == 32)
-        {
-            for (int i = 0; i < clip32.Length; i++)
-            {
-                background.GetComponent<Renderer>().material.mainTexture = clip32[i];
-                yield return new WaitForSeconds(0.03f);
-            }
-        }
-        else if (clip == 33)
-        {
-            for (int i = 0; i < clip33.Length; i++)
-            {
-                background.GetComponent<Renderer>().material.mainTexture = clip33[i];
-                yield return new WaitForSeconds(0.03f);
-            }
-        }
-        else if (clip == 34)
-        {
-            for (int i = 0; i < clip34.Length; i++)
-            {
-                background.GetComponent<Renderer>().material.mainTexture = clip34[i];
-                yield return new WaitForSeconds(0.03f);
-            }
-        }
-        else if (clip == 35)
-        {
-            for (int i = 0; i < clip35.Length; i++)
-            {
-                background.GetComponent<Renderer>().material.mainTexture = clip35[i];
-                yield return new WaitForSeconds(0.03f);
-            }
-        }
-        else if (clip == 36)
-        {
-            for (int i = 0; i < clip36.Length; i++)
-            {
-                background.GetComponent<Renderer>().material.mainTexture = clip36[i];
-                yield return new WaitForSeconds(0.03f);
-            }
-        }
-        else if (clip == 37)
-        {
-            for (int i = 0; i < clip37.Length; i++)
-            {
-                background.GetComponent<Renderer>().material.mainTexture = clip37[i];
-                yield return new WaitForSeconds(0.03f);
-            }
-        }
-        else if (clip == 38)
-        {
-            for (int i = 0; i < clip38.Length; i++)
-            {
-                background.GetComponent<Renderer>().material.mainTexture = clip38[i];
-                yield return new WaitForSeconds(0.03f);
-            }
-        }
-        else if (clip == 39)
-        {
-            for (int i = 0; i < clip39.Length; i++)
-            {
-                background.GetComponent<Renderer>().material.mainTexture = clip39[i];
-                yield return new WaitForSeconds(0.03f);
-            }
-        }
-        else if (clip == 40)
-        {
-            for (int i = 0; i < clip40.Length; i++)
-            {
-                background.GetComponent<Renderer>().material.mainTexture = clip40[i];
-                yield return new WaitForSeconds(0.03f);
-            }
-        }
-        else if (clip == 41)
-        {
-            for (int i = 0; i < clip41.Length; i++)
-            {
-                background.GetComponent<Renderer>().material.mainTexture = clip41[i];
-                yield return new WaitForSeconds(0.03f);
-            }
-        }
-        else if (clip == 42)
-        {
-            for (int i = 0; i < clip42.Length; i++)
-            {
-                background.GetComponent<Renderer>().material.mainTexture = clip42[i];
-                yield return new WaitForSeconds(0.03f);
-            }
-        }
-        else if (clip == 43)
-        {
-            for (int i = 0; i < clip43.Length; i++)
-            {
-                background.GetComponent<Renderer>().material.mainTexture = clip43[i];
-                yield return new WaitForSeconds(0.03f);
-            }
-        }
-        else if (clip == 44)
-        {
-            for (int i = 0; i < clip44.Length; i++)
-            {
-                background.GetComponent<Renderer>().material.mainTexture = clip44[i];
-                yield return new WaitForSeconds(0.03f);
-            }
-        }
-        else if (clip == 45)
-        {
-            for (int i = 0; i < clip45.Length; i++)
-            {
-                background.GetComponent<Renderer>().material.mainTexture = clip45[i];
-                yield return new WaitForSeconds(0.03f);
-            }
-        }
-        else if (clip == 46)
-        {
-            for (int i = 0; i < clip46.Length; i++)
-            {
-                background.GetComponent<Renderer>().material.mainTexture = clip46[i];
-                yield return new WaitForSeconds(0.03f);
-            }
-        }
-        else if (clip == 47)
-        {
-            for (int i = 0; i < clip47.Length; i++)
-            {
-                background.GetComponent<Renderer>().material.mainTexture = clip47[i];
-                yield return new WaitForSeconds(0.03f);
-            }
-        }
-        else if (clip == 48)
-        {
-            for (int i = 0; i < clip48.Length; i++)
-            {
-                background.GetComponent<Renderer>().material.mainTexture = clip48[i];
-                yield return new WaitForSeconds(0.03f);
-            }
-        }
-        else if (clip == 49)
-        {
-            for (int i = 0; i < clip49.Length; i++)
-            {
-                background.GetComponent<Renderer>().material.mainTexture = clip49[i];
-                yield return new WaitForSeconds(0.03f);
-            }
-        }
-        else if (clip == 50)
-        {
-            for (int i = 0; i < clip50.Length; i++)
-            {
-                background.GetComponent<Renderer>().material.mainTexture = clip50[i];
-                yield return new WaitForSeconds(0.03f);
-            }
-        }
-        else if (clip == 51)
-        {
-            for (int i = 0; i < clip51.Length; i++)
-            {
-                background.GetComponent<Renderer>().material.mainTexture = clip51[i];
-                yield return new WaitForSeconds(0.03f);
-            }
-        }
-        else if (clip == 52)
-        {
-            for (int i = 0; i < clip52.Length; i++)
-            {
-                background.GetComponent<Renderer>().material.mainTexture = clip52[i];
-                yield return new WaitForSeconds(0.03f);
-            }
-        }
-        else if (clip == 53)
-        {
-            for (int i = 0; i < clip53.Length; i++)
-            {
-                background.GetComponent<Renderer>().material.mainTexture = clip53[i];
-                yield return new WaitForSeconds(0.03f);
-            }
-        }
-        else if (clip == 54)
-        {
-            for (int i = 0; i < clip54.Length; i++)
-            {
-                background.GetComponent<Renderer>().material.mainTexture = clip54[i];
-                yield return new WaitForSeconds(0.03f);
-            }
-        }
-        else if (clip == 55)
-        {
-            for (int i = 0; i < clip55.Length; i++)
-            {
-                background.GetComponent<Renderer>().material.mainTexture = clip55[i];
-                yield return new WaitForSeconds(0.03f);
-            }
-        }
-        else if (clip == 56)
-        {
-            for (int i = 0; i < clip56.Length; i++)
-            {
-                background.GetComponent<Renderer>().material.mainTexture = clip56[i];
-                yield return new WaitForSeconds(0.03f);
-            }
-        }
-        aud.Stop();
-        yield return new WaitForSeconds(0.5f);
-        background.GetComponent<Renderer>().material.mainTexture = originalMat.mainTexture;
-        //end not originally here
-
+        yield return new WaitForSeconds(9f);
+        player.Stop();
         for (int i = 0; i < 2; i++)
         {
             endTexts[i].SetActive(true);
@@ -1966,9 +1459,8 @@ public class GeometryDashScript : MonoBehaviour
     private IEnumerator end()
     {
         animating = true;
-        //player.clip = clips[56];
+        player.clip = VideoLoader.clips[56];
         audio.PlaySoundAtTransform("endStart_02", transform);
-        //player.Play();
         for (int i = 0; i < 2; i++)
         {
             endTexts[i].SetActive(false);
@@ -1978,18 +1470,9 @@ public class GeometryDashScript : MonoBehaviour
             icons[i].SetActive(false);
             endButtons[i].SetActive(false);
         }
-
-        //originally not here
-        for (int i = 0; i < endimg.Length; i++)
-        {
-            background.GetComponent<Renderer>().material.mainTexture = endimg[i];
-            yield return new WaitForSeconds(0.04f);
-        }
-        yield return new WaitForSeconds(0.5f);
-        //end originally not here
-
-        //yield return new WaitForSeconds(3.5f);
-        //player.Stop();
+        player.Play();
+        yield return new WaitForSeconds(3.5f);
+        player.Stop();
         background.GetComponent<Renderer>().material = endBack;
         animating = false;
         moduleSolved = true;
@@ -2012,7 +1495,7 @@ public class GeometryDashScript : MonoBehaviour
                 {
                     buttons[1].OnInteract();
                     yield return new WaitForSeconds(0.1f);
-                    while(animating == true)
+                    while(animating)
                     {
                         yield return new WaitForSeconds(0.1f);
                         yield return "trycancel Focus on level clip cancelled due to cancel request.";
@@ -2022,7 +1505,7 @@ public class GeometryDashScript : MonoBehaviour
                 {
                     buttons[0].OnInteract();
                     yield return new WaitForSeconds(0.1f);
-                    while (animating == true)
+                    while (animating)
                     {
                         yield return new WaitForSeconds(0.1f);
                         yield return "trycancel Focus on level clip cancelled due to cancel request.";
@@ -2040,7 +1523,7 @@ public class GeometryDashScript : MonoBehaviour
             if(animating != true)
             {
                 yield return null;
-                if (started == true)
+                if (started)
                 {
                     buttons[1].OnInteract();
                 }
@@ -2060,7 +1543,7 @@ public class GeometryDashScript : MonoBehaviour
             if (animating != true)
             {
                 yield return null;
-                if (started == true)
+                if (started)
                 {
                     buttons[2].OnInteract();
                 }
@@ -2080,8 +1563,16 @@ public class GeometryDashScript : MonoBehaviour
             if (animating != true)
             {
                 yield return null;
-                if (started == true)
+                if (started)
                 {
+                    if (correctBut == 0)
+                    {
+                        yield return "solve";
+                    }
+                    else
+                    {
+                        yield return "strike";
+                    }
                     buttons[3].OnInteract();
                 }
                 else
@@ -2100,8 +1591,16 @@ public class GeometryDashScript : MonoBehaviour
             if (animating != true)
             {
                 yield return null;
-                if (started == true)
+                if (started)
                 {
+                    if (correctBut == 1)
+                    {
+                        yield return "solve";
+                    }
+                    else
+                    {
+                        yield return "strike";
+                    }
                     buttons[4].OnInteract();
                 }
                 else
@@ -2120,8 +1619,16 @@ public class GeometryDashScript : MonoBehaviour
             if (animating != true)
             {
                 yield return null;
-                if (started == true)
+                if (started)
                 {
+                    if (correctBut == 2)
+                    {
+                        yield return "solve";
+                    }
+                    else
+                    {
+                        yield return "strike";
+                    }
                     buttons[5].OnInteract();
                 }
                 else
@@ -2140,8 +1647,16 @@ public class GeometryDashScript : MonoBehaviour
             if (animating != true)
             {
                 yield return null;
-                if (started == true)
+                if (started)
                 {
+                    if (correctBut == 3)
+                    {
+                        yield return "solve";
+                    }
+                    else
+                    {
+                        yield return "strike";
+                    }
                     buttons[6].OnInteract();
                 }
                 else
@@ -2155,5 +1670,16 @@ public class GeometryDashScript : MonoBehaviour
             }
             yield break;
         }
+    }
+
+    IEnumerator TwitchHandleForcedSolve()
+    {
+        if (!started)
+        {
+            buttons[0].OnInteract();
+        }
+        while (!started) { yield return true; }
+        buttons[correctBut+3].OnInteract();
+        while (animating) { yield return true; }
     }
 }
