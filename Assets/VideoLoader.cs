@@ -49,10 +49,6 @@ public class VideoLoader : MonoBehaviour
             {
                 clips = mainBundle.LoadAllAssets<VideoClip>().OrderBy(clip => clip.name).ToArray();
             }
-            foreach(VideoClip clip in clips)
-            {
-                Debug.Log("[AbsolutelyBonkers.mpeg] "+clip.name);
-            }
         }
     }
 }
