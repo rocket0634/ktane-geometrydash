@@ -51,6 +51,7 @@ public class GeometryDashScript : MonoBehaviour
 
     private bool started = false;
     private bool animating = false;
+    private bool reset = false;
 
     private int correctBut;
     private int correctCubeIndex;
@@ -75,7 +76,7 @@ public class GeometryDashScript : MonoBehaviour
     }
 
     //Test to make sure videos load in game, uncomment this method and line above to see for yourself by building the mod and running it locally
-    /**8private IEnumerator WaitForVideoClips()
+    /**private IEnumerator WaitForVideoClips()
     {
         yield return new WaitUntil(() => VideoLoader.clips != null);
 
@@ -128,6 +129,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (pressed == buttons[2])
             {
+                reset = true;
                 audio.PlaySoundAtTransform("explode_11", transform);
                 Debug.LogFormat("[Geometry Dash #{0}] The module has been reset!", moduleId);
                 Debug.LogFormat("[Geometry Dash #{0}] --------------------------------------------", moduleId);
@@ -1445,12 +1447,22 @@ public class GeometryDashScript : MonoBehaviour
         player.Stop();
         for (int i = 0; i < 2; i++)
         {
-            endTexts[i].SetActive(true);
+            if (i == 1 && reset)
+                continue;
+            else
+            {
+                endTexts[i].SetActive(true);
+            }
         }
         for (int i = 0; i < 6; i++)
         {
-            icons[i].SetActive(true);
-            endButtons[i].SetActive(true);
+            if (i == 1 && reset)
+                continue;
+            else
+            {
+                icons[i].SetActive(true);
+                endButtons[i].SetActive(true);
+            }
         }
         started = true;
         animating = false;
@@ -1488,9 +1500,9 @@ public class GeometryDashScript : MonoBehaviour
     {
         if (Regex.IsMatch(command, @"^\s*playfocus\s*$", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant))
         {
+            yield return null;
             if (animating != true)
             {
-                yield return null;
                 if (started == true)
                 {
                     buttons[1].OnInteract();
@@ -1520,9 +1532,9 @@ public class GeometryDashScript : MonoBehaviour
         }
         if (Regex.IsMatch(command, @"^\s*play\s*$", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant))
         {
-            if(animating != true)
+            yield return null;
+            if (animating != true)
             {
-                yield return null;
                 if (started)
                 {
                     buttons[1].OnInteract();
@@ -1540,38 +1552,41 @@ public class GeometryDashScript : MonoBehaviour
         }
         if (Regex.IsMatch(command, @"^\s*reset\s*$", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant))
         {
-            if (animating != true)
+            yield return null;
+            if (!reset)
             {
-                yield return null;
-                if (started)
+                if (animating != true)
                 {
-                    buttons[2].OnInteract();
+                    if (started)
+                    {
+                        buttons[2].OnInteract();
+                    }
+                    else
+                    {
+                        yield return "sendtochaterror I cannot reset myself if I haven't been started!";
+                    }
                 }
                 else
                 {
-                    yield return "sendtochaterror I cannot reset myself if I haven't been started!";
+                    yield return "sendtochaterror I cannot reset myself while I'm playing a level clip!";
                 }
             }
             else
             {
-                yield return "sendtochaterror I cannot reset myself while I'm playing a level clip!";
+                yield return "sendtochaterror I have already been reset once! I cannot be reset again!";
             }
             yield break;
         }
         if (Regex.IsMatch(command, @"^\s*cube 1\s*$", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant))
         {
+            yield return null;
             if (animating != true)
             {
-                yield return null;
                 if (started)
                 {
                     if (correctBut == 0)
                     {
                         yield return "solve";
-                    }
-                    else
-                    {
-                        yield return "strike";
                     }
                     buttons[3].OnInteract();
                 }
@@ -1588,18 +1603,14 @@ public class GeometryDashScript : MonoBehaviour
         }
         if (Regex.IsMatch(command, @"^\s*cube 2\s*$", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant))
         {
+            yield return null;
             if (animating != true)
             {
-                yield return null;
                 if (started)
                 {
                     if (correctBut == 1)
                     {
                         yield return "solve";
-                    }
-                    else
-                    {
-                        yield return "strike";
                     }
                     buttons[4].OnInteract();
                 }
@@ -1616,18 +1627,14 @@ public class GeometryDashScript : MonoBehaviour
         }
         if (Regex.IsMatch(command, @"^\s*cube 3\s*$", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant))
         {
+            yield return null;
             if (animating != true)
             {
-                yield return null;
                 if (started)
                 {
                     if (correctBut == 2)
                     {
                         yield return "solve";
-                    }
-                    else
-                    {
-                        yield return "strike";
                     }
                     buttons[5].OnInteract();
                 }
@@ -1644,18 +1651,14 @@ public class GeometryDashScript : MonoBehaviour
         }
         if (Regex.IsMatch(command, @"^\s*cube 4\s*$", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant))
         {
+            yield return null;
             if (animating != true)
             {
-                yield return null;
                 if (started)
                 {
                     if (correctBut == 3)
                     {
                         yield return "solve";
-                    }
-                    else
-                    {
-                        yield return "strike";
                     }
                     buttons[6].OnInteract();
                 }
