@@ -205,7 +205,7 @@ public class GeometryDashScript : MonoBehaviour
 
     private void pickVideoAndStats()
     {
-        int rando = UnityEngine.Random.Range(0, 56);
+        int rando = UnityEngine.Random.Range(0, 59);
         if (rando > -1 && rando < 4)
         {
             Debug.LogFormat("[Geometry Dash #{0}] The chosen level is: Valor", moduleId);
@@ -1115,6 +1115,53 @@ public class GeometryDashScript : MonoBehaviour
                 pads = true;
             }
         }
+        else if (rando > 55 && rando < 59)
+        {
+            Debug.LogFormat("[Geometry Dash #{0}] The chosen level is: Sakupen Hell", moduleId);
+            lvlname = "Sakupen Hell";
+            creators.Add("Noobas");
+            verifier = "TrusTa";
+            difficulty = "Extreme Demon";
+            songname = "Iron God: Sakupen Hell Yes RMX";
+            songmaker = "mr-jazzman";
+            Debug.LogFormat("[Geometry Dash #{0}] --------------------------------------------", moduleId);
+            if (rando == 56)
+            {
+                player.clip = VideoLoader.clips[56];
+                aud.clip = audios[56];
+                coin = false;
+                mirror = false;
+                speed = true;
+                teleport = false;
+                transformC = true;
+                orbs = true;
+                pads = true;
+            }
+            else if (rando == 57)
+            {
+                player.clip = VideoLoader.clips[57];
+                aud.clip = audios[57];
+                coin = false;
+                mirror = false;
+                speed = true;
+                teleport = false;
+                transformC = true;
+                orbs = true;
+                pads = true;
+            }
+            else if (rando == 58)
+            {
+                player.clip = VideoLoader.clips[58];
+                aud.clip = audios[58];
+                coin = false;
+                mirror = false;
+                speed = true;
+                teleport = false;
+                transformC = true;
+                orbs = false;
+                pads = true;
+            }
+        }
     }
 
     private void getNumber()
@@ -1471,7 +1518,7 @@ public class GeometryDashScript : MonoBehaviour
     private IEnumerator end()
     {
         animating = true;
-        player.clip = VideoLoader.clips[56];
+        player.clip = VideoLoader.clips[59];
         audio.PlaySoundAtTransform("endStart_02", transform);
         for (int i = 0; i < 2; i++)
         {
@@ -1681,8 +1728,8 @@ public class GeometryDashScript : MonoBehaviour
         {
             buttons[0].OnInteract();
         }
-        while (!started) { yield return true; }
+        while (!started) { yield return true; yield return new WaitForSeconds(0.01f); }
         buttons[correctBut+3].OnInteract();
-        while (animating) { yield return true; }
+        while (animating) { yield return true; yield return new WaitForSeconds(0.01f); }
     }
 }
