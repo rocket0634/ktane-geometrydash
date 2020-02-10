@@ -71,23 +71,13 @@ public class GeometryDashScript : MonoBehaviour
             KMSelectable pressed = obj;
             pressed.OnInteract += delegate () { PressButton(pressed); return false; };
         }
-
-        //StartCoroutine(WaitForVideoClips());
     }
 
-    //Test to make sure videos load in game, uncomment this method and line above to see for yourself by building the mod and running it locally
-    /**private IEnumerator WaitForVideoClips()
+    // Please not that this module cannot be tested in Unity! Please build it locally and run it in game to test it!
+    private IEnumerator WaitForVideoClips()
     {
         yield return new WaitUntil(() => VideoLoader.clips != null);
 
-        player.clip = VideoLoader.clips[0];
-        player.isLooping = true;
-        //player.GetComponent<AudioSource>().volume = 0.05f;
-        player.Play();
-    }*/
-
-    void Start()
-    {
         pickVideoAndStats();
         getNumber();
         randomizeButtons();
@@ -96,6 +86,11 @@ public class GeometryDashScript : MonoBehaviour
             endButtons[i].SetActive(false);
             icons[i].SetActive(false);
         }
+    }
+
+    void Start()
+    {
+        StartCoroutine(WaitForVideoClips());
     }
 
     void PressButton(KMSelectable pressed)
@@ -1728,8 +1723,8 @@ public class GeometryDashScript : MonoBehaviour
         {
             buttons[0].OnInteract();
         }
-        while (!started) { yield return true; yield return new WaitForSeconds(0.01f); }
+        while (!started) { yield return true; yield return new WaitForSeconds(0.1f); }
         buttons[correctBut+3].OnInteract();
-        while (animating) { yield return true; yield return new WaitForSeconds(0.01f); }
+        while (animating) { yield return true; yield return new WaitForSeconds(0.1f); }
     }
 }
