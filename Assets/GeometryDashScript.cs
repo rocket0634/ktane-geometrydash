@@ -254,7 +254,7 @@ public class GeometryDashScript : MonoBehaviour
                 aud.clip = audios[2];
                 coin = false;
                 mirror = false;
-                speed = false;
+                speed = true;
                 teleport = false;
                 transformC = true;
                 orbs = true;
