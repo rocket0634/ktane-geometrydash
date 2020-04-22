@@ -81,15 +81,15 @@ public class GeometryDashScript : MonoBehaviour
         pickVideoAndStats();
         getNumber();
         randomizeButtons();
+    }
+
+    void Start()
+    {
         for (int i = 0; i < 6; i++)
         {
             endButtons[i].SetActive(false);
             icons[i].SetActive(false);
         }
-    }
-
-    void Start()
-    {
         StartCoroutine(WaitForVideoClips());
     }
 
@@ -1157,6 +1157,114 @@ public class GeometryDashScript : MonoBehaviour
                 pads = true;
             }
         }
+        else if (rando > 58 && rando < 62)
+        {
+            Debug.LogFormat("[Geometry Dash #{0}] The chosen level is: love baba", moduleId);
+            lvlname = "love baba";
+            creators.Add("Zobros");
+            creators.Add("Demonico17");
+            verifier = "Zobros";
+            difficulty = "Insane Demon";
+            songname = "The Empire Of Toads";
+            songmaker = "Bossfight";
+            Debug.LogFormat("[Geometry Dash #{0}] --------------------------------------------", moduleId);
+            if (rando == 59)
+            {
+                player.clip = VideoLoader.clips[59];
+                aud.clip = audios[59];
+                coin = false;
+                mirror = false;
+                speed = false;
+                teleport = false;
+                transformC = true;
+                orbs = true;
+                pads = false;
+            }
+            else if (rando == 60)
+            {
+                player.clip = VideoLoader.clips[60];
+                aud.clip = audios[60];
+                coin = true;
+                mirror = false;
+                speed = false;
+                teleport = false;
+                transformC = true;
+                orbs = false;
+                pads = false;
+            }
+            else if (rando == 61)
+            {
+                player.clip = VideoLoader.clips[61];
+                aud.clip = audios[61];
+                coin = false;
+                mirror = false;
+                speed = false;
+                teleport = false;
+                transformC = false;
+                orbs = true;
+                pads = false;
+            }
+        }
+        else if (rando > 61 && rando < 66)
+        {
+            Debug.LogFormat("[Geometry Dash #{0}] The chosen level is: PP", moduleId);
+            lvlname = "PP";
+            creators.Add("AmorAltra");
+            creators.Add("BoomKitty");
+            verifier = "AmorAltra";
+            difficulty = "Easy Demon";
+            songname = "Peepee Song";
+            songmaker = "BoomKitty";
+            Debug.LogFormat("[Geometry Dash #{0}] --------------------------------------------", moduleId);
+            if (rando == 62)
+            {
+                player.clip = VideoLoader.clips[62];
+                aud.clip = audios[62];
+                coin = false;
+                mirror = false;
+                speed = true;
+                teleport = false;
+                transformC = false;
+                orbs = true;
+                pads = true;
+            }
+            else if (rando == 63)
+            {
+                player.clip = VideoLoader.clips[63];
+                aud.clip = audios[63];
+                coin = true;
+                mirror = false;
+                speed = false;
+                teleport = false;
+                transformC = true;
+                orbs = true;
+                pads = true;
+            }
+            else if (rando == 64)
+            {
+                player.clip = VideoLoader.clips[64];
+                aud.clip = audios[64];
+                coin = true;
+                mirror = false;
+                speed = true;
+                teleport = false;
+                transformC = false;
+                orbs = true;
+                pads = true;
+            }
+            else if (rando == 65)
+            {
+                player.clip = VideoLoader.clips[65];
+                aud.clip = audios[65];
+                coin = false;
+                mirror = false;
+                speed = true;
+                teleport = false;
+                transformC = true;
+                orbs = true;
+                pads = false;
+            }
+        }
     }
 
     private void getNumber()
@@ -1719,11 +1827,11 @@ public class GeometryDashScript : MonoBehaviour
 
     IEnumerator TwitchHandleForcedSolve()
     {
-        if (!started)
+        if (!started && !animating)
         {
             buttons[0].OnInteract();
         }
-        while (!started) { yield return true; yield return new WaitForSeconds(0.1f); }
+        while (animating) { yield return true; yield return new WaitForSeconds(0.1f); }
         buttons[correctBut+3].OnInteract();
         while (animating) { yield return true; yield return new WaitForSeconds(0.1f); }
     }
