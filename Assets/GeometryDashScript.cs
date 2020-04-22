@@ -200,7 +200,7 @@ public class GeometryDashScript : MonoBehaviour
 
     private void pickVideoAndStats()
     {
-        int rando = UnityEngine.Random.Range(0, 59);
+        int rando = UnityEngine.Random.Range(0, VideoLoader.clips.Length);
         if (rando > -1 && rando < 4)
         {
             Debug.LogFormat("[Geometry Dash #{0}] The chosen level is: Valor", moduleId);

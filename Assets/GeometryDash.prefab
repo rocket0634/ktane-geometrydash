@@ -1881,6 +1881,13 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 736e41046356e0e4aa94017578d3568c, type: 3}
   - {fileID: 8300000, guid: 6dbe6070e148cde4f9393128113de593, type: 3}
   - {fileID: 8300000, guid: f6d6d7677b9187c49999814e966e1abd, type: 3}
+  - {fileID: 8300000, guid: ad276339bf534944c919d2de3c77f7c2, type: 3}
+  - {fileID: 8300000, guid: 2633f01d21c74bd459e749aa11d4b7c2, type: 3}
+  - {fileID: 8300000, guid: 8d8273be1028eda47ad74ab60b765fa6, type: 3}
+  - {fileID: 8300000, guid: e2f15002dbeaa3c42923bc57878f96ec, type: 3}
+  - {fileID: 8300000, guid: 22c9913ee021e2d4a99cbd158e81c151, type: 3}
+  - {fileID: 8300000, guid: ee194542d83af724983d3fbd1baf326a, type: 3}
+  - {fileID: 8300000, guid: 8e33b9846e082f24eb19c918ebcb39a6, type: 3}
   buttons:
   - {fileID: 114868619155697362}
   - {fileID: 114781333703580148}
@@ -2784,7 +2791,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 180, y: 0, z: 180}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -27.6, y: -22.500006}
+  m_AnchoredPosition: {x: -27.6, y: -22.6001}
   m_SizeDelta: {x: 100, y: 95}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224426419055702836

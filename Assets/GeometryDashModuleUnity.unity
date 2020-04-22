@@ -264,11 +264,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 114017367703905494, guid: 63efc1563d37b474e9bf4fcde8ea72ea,
-        type: 2}
-      propertyPath: audios.Array.size
-      value: 66
-      objectReference: {fileID: 0}
     - target: {fileID: 4041300201032840, guid: 63efc1563d37b474e9bf4fcde8ea72ea, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -301,41 +296,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 114017367703905494, guid: 63efc1563d37b474e9bf4fcde8ea72ea,
-        type: 2}
-      propertyPath: audios.Array.data[59]
-      value: 
-      objectReference: {fileID: 8300000, guid: ad276339bf534944c919d2de3c77f7c2, type: 3}
-    - target: {fileID: 114017367703905494, guid: 63efc1563d37b474e9bf4fcde8ea72ea,
-        type: 2}
-      propertyPath: audios.Array.data[60]
-      value: 
-      objectReference: {fileID: 8300000, guid: 2633f01d21c74bd459e749aa11d4b7c2, type: 3}
-    - target: {fileID: 114017367703905494, guid: 63efc1563d37b474e9bf4fcde8ea72ea,
-        type: 2}
-      propertyPath: audios.Array.data[61]
-      value: 
-      objectReference: {fileID: 8300000, guid: 8d8273be1028eda47ad74ab60b765fa6, type: 3}
-    - target: {fileID: 114017367703905494, guid: 63efc1563d37b474e9bf4fcde8ea72ea,
-        type: 2}
-      propertyPath: audios.Array.data[62]
-      value: 
-      objectReference: {fileID: 8300000, guid: e2f15002dbeaa3c42923bc57878f96ec, type: 3}
-    - target: {fileID: 114017367703905494, guid: 63efc1563d37b474e9bf4fcde8ea72ea,
-        type: 2}
-      propertyPath: audios.Array.data[63]
-      value: 
-      objectReference: {fileID: 8300000, guid: 22c9913ee021e2d4a99cbd158e81c151, type: 3}
-    - target: {fileID: 114017367703905494, guid: 63efc1563d37b474e9bf4fcde8ea72ea,
-        type: 2}
-      propertyPath: audios.Array.data[64]
-      value: 
-      objectReference: {fileID: 8300000, guid: ee194542d83af724983d3fbd1baf326a, type: 3}
-    - target: {fileID: 114017367703905494, guid: 63efc1563d37b474e9bf4fcde8ea72ea,
-        type: 2}
-      propertyPath: audios.Array.data[65]
-      value: 
-      objectReference: {fileID: 8300000, guid: 8e33b9846e082f24eb19c918ebcb39a6, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 63efc1563d37b474e9bf4fcde8ea72ea, type: 2}
   m_IsPrefabParent: 0
