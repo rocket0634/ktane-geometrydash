@@ -1621,7 +1621,7 @@ public class GeometryDashScript : MonoBehaviour
     private IEnumerator end()
     {
         animating = true;
-        player.clip = VideoLoader.clips[59];
+        player.clip = VideoLoader.clips[VideoLoader.clips.Length-1];
         audio.PlaySoundAtTransform("endStart_02", transform);
         for (int i = 0; i < 2; i++)
         {
