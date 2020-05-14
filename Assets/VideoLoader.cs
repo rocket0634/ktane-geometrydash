@@ -39,7 +39,7 @@ public class VideoLoader : MonoBehaviour
 
         foreach (string fileName in paths)
         {
-            if (Path.GetFileName(fileName) != "video.bundle")
+            if (Path.GetFileName(fileName) != "gdvideo.bundle")
                 continue;
 
             var request = AssetBundle.LoadFromFileAsync(fileName);

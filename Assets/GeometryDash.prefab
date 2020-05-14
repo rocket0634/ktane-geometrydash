@@ -513,7 +513,7 @@ GameObject:
   - component: {fileID: 328375936857721750}
   - component: {fileID: 82974105956275918}
   m_Layer: 0
-  m_Name: Video Player
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

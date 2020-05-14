@@ -439,8 +439,8 @@ public class AssetBundler
         string destPath = Path.Combine(outputFolder, BUNDLE_FILENAME);
         File.Copy(srcPath, destPath, true);
 
-        srcPath = Path.Combine(TEMP_BUILD_FOLDER, "video.bundle");
-        destPath = Path.Combine(outputFolder, "video.bundle");
+        srcPath = Path.Combine(TEMP_BUILD_FOLDER, "gdvideo.bundle");
+        destPath = Path.Combine(outputFolder, "gdvideo.bundle");
         File.Copy(srcPath, destPath, true);
     }
 
