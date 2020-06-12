@@ -1473,7 +1473,7 @@ public class GeometryDashScript : MonoBehaviour
             newNum -= (startingNum - ct);
             Debug.LogFormat("[Geometry Dash #{0}] The starting number minus the number of letters in the level's song creator is: {1}, which subtracted from the number is: {2}", moduleId, startingNum - ct, newNum);
         }
-        correctCubeIndex = (newNum % 20) + 1;
+        correctCubeIndex = mod(newNum, 20) + 1;
         Debug.LogFormat("[Geometry Dash #{0}] Final Calculation: {1} % 20 + 1 = {2}", moduleId, newNum, correctCubeIndex);
         Debug.LogFormat("[Geometry Dash #{0}] The correct cube to press according to the manual's table is: {1}", moduleId, correctCubeIndex);
     }
@@ -1570,6 +1570,12 @@ public class GeometryDashScript : MonoBehaviour
                 icons[4].GetComponent<Image>().sprite = cubes[rand4];
             }
         }
+    }
+
+    private int mod(int x, int m)
+    {
+        int r = x % m;
+        return r < 0 ? r + m : r;
     }
 
     private IEnumerator startDelayPlay()
