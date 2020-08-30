@@ -18,6 +18,7 @@ public class GeometryDashScript : MonoBehaviour
     public KMSelectable[] buttons;
 
     public VideoPlayer player;
+    public VideoClip[] internalClips;
 
     //start menu things
     public GameObject button;
@@ -52,6 +53,8 @@ public class GeometryDashScript : MonoBehaviour
     private bool started = false;
     private bool animating = false;
     private bool reset = false;
+    private bool useInternal = false;
+    private bool loading = true;
 
     private int correctBut;
     private int correctCubeIndex;
@@ -71,6 +74,11 @@ public class GeometryDashScript : MonoBehaviour
             KMSelectable pressed = obj;
             pressed.OnInteract += delegate () { PressButton(pressed); return false; };
         }
+        if (Application.isEditor)
+        {
+            useInternal = true;
+            loading = false;
+        }
     }
 
     // Please not that this module cannot be tested in Unity! Please build it locally and run it in game to test it!
@@ -81,6 +89,7 @@ public class GeometryDashScript : MonoBehaviour
         pickVideoAndStats();
         getNumber();
         randomizeButtons();
+        loading = false;
     }
 
     void Start()
@@ -90,12 +99,19 @@ public class GeometryDashScript : MonoBehaviour
             endButtons[i].SetActive(false);
             icons[i].SetActive(false);
         }
-        StartCoroutine(WaitForVideoClips());
+        if (!useInternal)
+            StartCoroutine(WaitForVideoClips());
+        else
+        {
+            pickVideoAndStats();
+            getNumber();
+            randomizeButtons();
+        }
     }
 
     void PressButton(KMSelectable pressed)
     {
-        if (moduleSolved != true)
+        if (moduleSolved != true && loading != true)
         {
             pressed.AddInteractionPunch(0.25f);
             if (pressed == buttons[0])
@@ -200,7 +216,7 @@ public class GeometryDashScript : MonoBehaviour
 
     private void pickVideoAndStats()
     {
-        int rando = UnityEngine.Random.Range(0, VideoLoader.clips.Length);
+        int rando = Random.Range(0, useInternal ? internalClips.Length : VideoLoader.clips.Length);
         if (rando > -1 && rando < 4)
         {
             Debug.LogFormat("[Geometry Dash #{0}] The chosen level is: Valor", moduleId);
@@ -226,7 +242,7 @@ public class GeometryDashScript : MonoBehaviour
             Debug.LogFormat("[Geometry Dash #{0}] --------------------------------------------", moduleId);
             if (rando == 0)
             {
-                player.clip = VideoLoader.clips[0];
+                player.clip = useInternal ? internalClips[0] : VideoLoader.clips[0];
                 aud.clip = audios[0];
                 coin = false;
                 mirror = false;
@@ -238,7 +254,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 1)
             {
-                player.clip = VideoLoader.clips[1];
+                player.clip = useInternal ? internalClips[1] : VideoLoader.clips[1];
                 aud.clip = audios[1];
                 coin = false;
                 mirror = false;
@@ -250,7 +266,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 2)
             {
-                player.clip = VideoLoader.clips[2];
+                player.clip = useInternal ? internalClips[2] : VideoLoader.clips[2];
                 aud.clip = audios[2];
                 coin = false;
                 mirror = false;
@@ -262,7 +278,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 3)
             {
-                player.clip = VideoLoader.clips[3];
+                player.clip = useInternal ? internalClips[3] : VideoLoader.clips[3];
                 aud.clip = audios[3];
                 coin = false;
                 mirror = false;
@@ -285,7 +301,7 @@ public class GeometryDashScript : MonoBehaviour
             Debug.LogFormat("[Geometry Dash #{0}] --------------------------------------------", moduleId);
             if (rando == 4)
             {
-                player.clip = VideoLoader.clips[4];
+                player.clip = useInternal ? internalClips[4] : VideoLoader.clips[4];
                 aud.clip = audios[4];
                 coin = false;
                 mirror = false;
@@ -297,7 +313,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 5)
             {
-                player.clip = VideoLoader.clips[5];
+                player.clip = useInternal ? internalClips[5] : VideoLoader.clips[5];
                 aud.clip = audios[5];
                 coin = false;
                 mirror = false;
@@ -309,7 +325,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 6)
             {
-                player.clip = VideoLoader.clips[6];
+                player.clip = useInternal ? internalClips[6] : VideoLoader.clips[6];
                 aud.clip = audios[6];
                 coin = false;
                 mirror = false;
@@ -321,7 +337,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 7)
             {
-                player.clip = VideoLoader.clips[7];
+                player.clip = useInternal ? internalClips[7] : VideoLoader.clips[7];
                 aud.clip = audios[7];
                 coin = false;
                 mirror = false;
@@ -344,7 +360,7 @@ public class GeometryDashScript : MonoBehaviour
             Debug.LogFormat("[Geometry Dash #{0}] --------------------------------------------", moduleId);
             if (rando == 8)
             {
-                player.clip = VideoLoader.clips[8];
+                player.clip = useInternal ? internalClips[8] : VideoLoader.clips[8];
                 aud.clip = audios[8];
                 coin = false;
                 mirror = false;
@@ -356,7 +372,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 9)
             {
-                player.clip = VideoLoader.clips[9];
+                player.clip = useInternal ? internalClips[9] : VideoLoader.clips[9];
                 aud.clip = audios[9];
                 coin = true;
                 mirror = false;
@@ -368,7 +384,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 10)
             {
-                player.clip = VideoLoader.clips[10];
+                player.clip = useInternal ? internalClips[10] : VideoLoader.clips[10];
                 aud.clip = audios[10];
                 coin = true;
                 mirror = false;
@@ -403,7 +419,7 @@ public class GeometryDashScript : MonoBehaviour
             Debug.LogFormat("[Geometry Dash #{0}] --------------------------------------------", moduleId);
             if (rando == 11)
             {
-                player.clip = VideoLoader.clips[11];
+                player.clip = useInternal ? internalClips[11] : VideoLoader.clips[11];
                 aud.clip = audios[11];
                 coin = false;
                 mirror = false;
@@ -415,7 +431,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 12)
             {
-                player.clip = VideoLoader.clips[12];
+                player.clip = useInternal ? internalClips[12] : VideoLoader.clips[12];
                 aud.clip = audios[12];
                 coin = false;
                 mirror = false;
@@ -427,7 +443,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 13)
             {
-                player.clip = VideoLoader.clips[13];
+                player.clip = useInternal ? internalClips[13] : VideoLoader.clips[13];
                 aud.clip = audios[13];
                 coin = false;
                 mirror = false;
@@ -439,7 +455,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 14)
             {
-                player.clip = VideoLoader.clips[14];
+                player.clip = useInternal ? internalClips[14] : VideoLoader.clips[14];
                 aud.clip = audios[14];
                 coin = false;
                 mirror = false;
@@ -462,7 +478,7 @@ public class GeometryDashScript : MonoBehaviour
             Debug.LogFormat("[Geometry Dash #{0}] --------------------------------------------", moduleId);
             if (rando == 15)
             {
-                player.clip = VideoLoader.clips[15];
+                player.clip = useInternal ? internalClips[15] : VideoLoader.clips[15];
                 aud.clip = audios[15];
                 coin = false;
                 mirror = false;
@@ -474,7 +490,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 16)
             {
-                player.clip = VideoLoader.clips[16];
+                player.clip = useInternal ? internalClips[16] : VideoLoader.clips[16];
                 aud.clip = audios[16];
                 coin = false;
                 mirror = false;
@@ -486,7 +502,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 17)
             {
-                player.clip = VideoLoader.clips[17];
+                player.clip = useInternal ? internalClips[17] : VideoLoader.clips[17];
                 aud.clip = audios[17];
                 coin = false;
                 mirror = false;
@@ -524,7 +540,7 @@ public class GeometryDashScript : MonoBehaviour
             Debug.LogFormat("[Geometry Dash #{0}] --------------------------------------------", moduleId);
             if (rando == 18)
             {
-                player.clip = VideoLoader.clips[18];
+                player.clip = useInternal ? internalClips[18] : VideoLoader.clips[18];
                 aud.clip = audios[18];
                 coin = false;
                 mirror = false;
@@ -536,7 +552,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 19)
             {
-                player.clip = VideoLoader.clips[19];
+                player.clip = useInternal ? internalClips[19] : VideoLoader.clips[19];
                 aud.clip = audios[19];
                 coin = true;
                 mirror = false;
@@ -548,7 +564,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 20)
             {
-                player.clip = VideoLoader.clips[20];
+                player.clip = useInternal ? internalClips[20] : VideoLoader.clips[20];
                 aud.clip = audios[20];
                 coin = false;
                 mirror = false;
@@ -560,7 +576,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 21)
             {
-                player.clip = VideoLoader.clips[21];
+                player.clip = useInternal ? internalClips[21] : VideoLoader.clips[21];
                 aud.clip = audios[21];
                 coin = true;
                 mirror = false;
@@ -583,7 +599,7 @@ public class GeometryDashScript : MonoBehaviour
             Debug.LogFormat("[Geometry Dash #{0}] --------------------------------------------", moduleId);
             if (rando == 22)
             {
-                player.clip = VideoLoader.clips[22];
+                player.clip = useInternal ? internalClips[22] : VideoLoader.clips[22];
                 aud.clip = audios[22];
                 coin = true;
                 mirror = false;
@@ -595,7 +611,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 23)
             {
-                player.clip = VideoLoader.clips[23];
+                player.clip = useInternal ? internalClips[23] : VideoLoader.clips[23];
                 aud.clip = audios[23];
                 coin = false;
                 mirror = true;
@@ -607,7 +623,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 24)
             {
-                player.clip = VideoLoader.clips[24];
+                player.clip = useInternal ? internalClips[24] : VideoLoader.clips[24];
                 aud.clip = audios[24];
                 coin = false;
                 mirror = true;
@@ -639,7 +655,7 @@ public class GeometryDashScript : MonoBehaviour
             Debug.LogFormat("[Geometry Dash #{0}] --------------------------------------------", moduleId);
             if (rando == 25)
             {
-                player.clip = VideoLoader.clips[25];
+                player.clip = useInternal ? internalClips[25] : VideoLoader.clips[25];
                 aud.clip = audios[25];
                 coin = false;
                 mirror = false;
@@ -651,7 +667,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 26)
             {
-                player.clip = VideoLoader.clips[26];
+                player.clip = useInternal ? internalClips[26] : VideoLoader.clips[26];
                 aud.clip = audios[26];
                 coin = false;
                 mirror = false;
@@ -663,7 +679,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 27)
             {
-                player.clip = VideoLoader.clips[27];
+                player.clip = useInternal ? internalClips[27] : VideoLoader.clips[27];
                 aud.clip = audios[27];
                 coin = false;
                 mirror = false;
@@ -675,7 +691,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 28)
             {
-                player.clip = VideoLoader.clips[28];
+                player.clip = useInternal ? internalClips[28] : VideoLoader.clips[28];
                 aud.clip = audios[28];
                 coin = false;
                 mirror = false;
@@ -698,7 +714,7 @@ public class GeometryDashScript : MonoBehaviour
             Debug.LogFormat("[Geometry Dash #{0}] --------------------------------------------", moduleId);
             if (rando == 29)
             {
-                player.clip = VideoLoader.clips[29];
+                player.clip = useInternal ? internalClips[29] : VideoLoader.clips[29];
                 aud.clip = audios[29];
                 coin = true;
                 mirror = false;
@@ -710,7 +726,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 30)
             {
-                player.clip = VideoLoader.clips[30];
+                player.clip = useInternal ? internalClips[30] : VideoLoader.clips[30];
                 aud.clip = audios[30];
                 coin = true;
                 mirror = true;
@@ -722,7 +738,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 31)
             {
-                player.clip = VideoLoader.clips[31];
+                player.clip = useInternal ? internalClips[31] : VideoLoader.clips[31];
                 aud.clip = audios[31];
                 coin = false;
                 mirror = false;
@@ -745,7 +761,7 @@ public class GeometryDashScript : MonoBehaviour
             Debug.LogFormat("[Geometry Dash #{0}] --------------------------------------------", moduleId);
             if (rando == 32)
             {
-                player.clip = VideoLoader.clips[32];
+                player.clip = useInternal ? internalClips[32] : VideoLoader.clips[32];
                 aud.clip = audios[32];
                 coin = true;
                 mirror = false;
@@ -757,7 +773,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 33)
             {
-                player.clip = VideoLoader.clips[33];
+                player.clip = useInternal ? internalClips[33] : VideoLoader.clips[33];
                 aud.clip = audios[33];
                 coin = true;
                 mirror = false;
@@ -769,7 +785,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 34)
             {
-                player.clip = VideoLoader.clips[34];
+                player.clip = useInternal ? internalClips[34] : VideoLoader.clips[34];
                 aud.clip = audios[34];
                 coin = false;
                 mirror = false;
@@ -792,7 +808,7 @@ public class GeometryDashScript : MonoBehaviour
             Debug.LogFormat("[Geometry Dash #{0}] --------------------------------------------", moduleId);
             if (rando == 35)
             {
-                player.clip = VideoLoader.clips[35];
+                player.clip = useInternal ? internalClips[35] : VideoLoader.clips[35];
                 aud.clip = audios[35];
                 coin = false;
                 mirror = false;
@@ -804,7 +820,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 36)
             {
-                player.clip = VideoLoader.clips[36];
+                player.clip = useInternal ? internalClips[36] : VideoLoader.clips[36];
                 aud.clip = audios[36];
                 coin = false;
                 mirror = false;
@@ -816,7 +832,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 37)
             {
-                player.clip = VideoLoader.clips[37];
+                player.clip = useInternal ? internalClips[37] : VideoLoader.clips[37];
                 aud.clip = audios[37];
                 coin = false;
                 mirror = false;
@@ -839,7 +855,7 @@ public class GeometryDashScript : MonoBehaviour
             Debug.LogFormat("[Geometry Dash #{0}] --------------------------------------------", moduleId);
             if (rando == 38)
             {
-                player.clip = VideoLoader.clips[38];
+                player.clip = useInternal ? internalClips[38] : VideoLoader.clips[38];
                 aud.clip = audios[38];
                 coin = false;
                 mirror = true;
@@ -851,7 +867,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 39)
             {
-                player.clip = VideoLoader.clips[39];
+                player.clip = useInternal ? internalClips[39] : VideoLoader.clips[39];
                 aud.clip = audios[39];
                 coin = false;
                 mirror = true;
@@ -874,7 +890,7 @@ public class GeometryDashScript : MonoBehaviour
             Debug.LogFormat("[Geometry Dash #{0}] --------------------------------------------", moduleId);
             if (rando == 40)
             {
-                player.clip = VideoLoader.clips[40];
+                player.clip = useInternal ? internalClips[40] : VideoLoader.clips[40];
                 aud.clip = audios[40];
                 coin = false;
                 mirror = false;
@@ -886,7 +902,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 41)
             {
-                player.clip = VideoLoader.clips[41];
+                player.clip = useInternal ? internalClips[41] : VideoLoader.clips[41];
                 aud.clip = audios[41];
                 coin = false;
                 mirror = false;
@@ -898,7 +914,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 42)
             {
-                player.clip = VideoLoader.clips[42];
+                player.clip = useInternal ? internalClips[42] : VideoLoader.clips[42];
                 aud.clip = audios[42];
                 coin = false;
                 mirror = false;
@@ -922,7 +938,7 @@ public class GeometryDashScript : MonoBehaviour
             Debug.LogFormat("[Geometry Dash #{0}] --------------------------------------------", moduleId);
             if (rando == 43)
             {
-                player.clip = VideoLoader.clips[43];
+                player.clip = useInternal ? internalClips[43] : VideoLoader.clips[43];
                 aud.clip = audios[43];
                 coin = true;
                 mirror = false;
@@ -934,7 +950,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 44)
             {
-                player.clip = VideoLoader.clips[44];
+                player.clip = useInternal ? internalClips[44] : VideoLoader.clips[44];
                 aud.clip = audios[44];
                 coin = true;
                 mirror = false;
@@ -946,7 +962,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 45)
             {
-                player.clip = VideoLoader.clips[45];
+                player.clip = useInternal ? internalClips[45] : VideoLoader.clips[45];
                 aud.clip = audios[45];
                 coin = true;
                 mirror = false;
@@ -969,7 +985,7 @@ public class GeometryDashScript : MonoBehaviour
             Debug.LogFormat("[Geometry Dash #{0}] --------------------------------------------", moduleId);
             if (rando == 46)
             {
-                player.clip = VideoLoader.clips[46];
+                player.clip = useInternal ? internalClips[46] : VideoLoader.clips[46];
                 aud.clip = audios[46];
                 coin = false;
                 mirror = false;
@@ -981,7 +997,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 47)
             {
-                player.clip = VideoLoader.clips[47];
+                player.clip = useInternal ? internalClips[47] : VideoLoader.clips[47];
                 aud.clip = audios[47];
                 coin = false;
                 mirror = true;
@@ -993,7 +1009,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 48)
             {
-                player.clip = VideoLoader.clips[48];
+                player.clip = useInternal ? internalClips[48] : VideoLoader.clips[48];
                 aud.clip = audios[48];
                 coin = false;
                 mirror = false;
@@ -1016,7 +1032,7 @@ public class GeometryDashScript : MonoBehaviour
             Debug.LogFormat("[Geometry Dash #{0}] --------------------------------------------", moduleId);
             if (rando == 49)
             {
-                player.clip = VideoLoader.clips[49];
+                player.clip = useInternal ? internalClips[49] : VideoLoader.clips[49];
                 aud.clip = audios[49];
                 coin = true;
                 mirror = false;
@@ -1028,7 +1044,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 50)
             {
-                player.clip = VideoLoader.clips[50];
+                player.clip = useInternal ? internalClips[50] : VideoLoader.clips[50];
                 aud.clip = audios[50];
                 coin = false;
                 mirror = false;
@@ -1040,7 +1056,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 51)
             {
-                player.clip = VideoLoader.clips[51];
+                player.clip = useInternal ? internalClips[51] : VideoLoader.clips[51];
                 aud.clip = audios[51];
                 coin = true;
                 mirror = false;
@@ -1063,7 +1079,7 @@ public class GeometryDashScript : MonoBehaviour
             Debug.LogFormat("[Geometry Dash #{0}] --------------------------------------------", moduleId);
             if (rando == 52)
             {
-                player.clip = VideoLoader.clips[52];
+                player.clip = useInternal ? internalClips[52] : VideoLoader.clips[52];
                 aud.clip = audios[52];
                 coin = false;
                 mirror = false;
@@ -1075,7 +1091,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 53)
             {
-                player.clip = VideoLoader.clips[53];
+                player.clip = useInternal ? internalClips[53] : VideoLoader.clips[53];
                 aud.clip = audios[53];
                 coin = false;
                 mirror = false;
@@ -1087,7 +1103,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 54)
             {
-                player.clip = VideoLoader.clips[54];
+                player.clip = useInternal ? internalClips[54] : VideoLoader.clips[54];
                 aud.clip = audios[54];
                 coin = false;
                 mirror = false;
@@ -1099,7 +1115,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 55)
             {
-                player.clip = VideoLoader.clips[55];
+                player.clip = useInternal ? internalClips[55] : VideoLoader.clips[55];
                 aud.clip = audios[55];
                 coin = false;
                 mirror = false;
@@ -1122,7 +1138,7 @@ public class GeometryDashScript : MonoBehaviour
             Debug.LogFormat("[Geometry Dash #{0}] --------------------------------------------", moduleId);
             if (rando == 56)
             {
-                player.clip = VideoLoader.clips[56];
+                player.clip = useInternal ? internalClips[56] : VideoLoader.clips[56];
                 aud.clip = audios[56];
                 coin = false;
                 mirror = false;
@@ -1134,7 +1150,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 57)
             {
-                player.clip = VideoLoader.clips[57];
+                player.clip = useInternal ? internalClips[57] : VideoLoader.clips[57];
                 aud.clip = audios[57];
                 coin = false;
                 mirror = false;
@@ -1146,7 +1162,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 58)
             {
-                player.clip = VideoLoader.clips[58];
+                player.clip = useInternal ? internalClips[58] : VideoLoader.clips[58];
                 aud.clip = audios[58];
                 coin = false;
                 mirror = false;
@@ -1170,7 +1186,7 @@ public class GeometryDashScript : MonoBehaviour
             Debug.LogFormat("[Geometry Dash #{0}] --------------------------------------------", moduleId);
             if (rando == 59)
             {
-                player.clip = VideoLoader.clips[59];
+                player.clip = useInternal ? internalClips[59] : VideoLoader.clips[59];
                 aud.clip = audios[59];
                 coin = false;
                 mirror = false;
@@ -1182,7 +1198,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 60)
             {
-                player.clip = VideoLoader.clips[60];
+                player.clip = useInternal ? internalClips[60] : VideoLoader.clips[60];
                 aud.clip = audios[60];
                 coin = true;
                 mirror = false;
@@ -1194,7 +1210,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 61)
             {
-                player.clip = VideoLoader.clips[61];
+                player.clip = useInternal ? internalClips[61] : VideoLoader.clips[61];
                 aud.clip = audios[61];
                 coin = false;
                 mirror = false;
@@ -1218,7 +1234,7 @@ public class GeometryDashScript : MonoBehaviour
             Debug.LogFormat("[Geometry Dash #{0}] --------------------------------------------", moduleId);
             if (rando == 62)
             {
-                player.clip = VideoLoader.clips[62];
+                player.clip = useInternal ? internalClips[62] : VideoLoader.clips[62];
                 aud.clip = audios[62];
                 coin = false;
                 mirror = false;
@@ -1230,7 +1246,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 63)
             {
-                player.clip = VideoLoader.clips[63];
+                player.clip = useInternal ? internalClips[63] : VideoLoader.clips[63];
                 aud.clip = audios[63];
                 coin = true;
                 mirror = false;
@@ -1242,7 +1258,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 64)
             {
-                player.clip = VideoLoader.clips[64];
+                player.clip = useInternal ? internalClips[64] : VideoLoader.clips[64];
                 aud.clip = audios[64];
                 coin = true;
                 mirror = false;
@@ -1254,7 +1270,7 @@ public class GeometryDashScript : MonoBehaviour
             }
             else if (rando == 65)
             {
-                player.clip = VideoLoader.clips[65];
+                player.clip = useInternal ? internalClips[65] : VideoLoader.clips[65];
                 aud.clip = audios[65];
                 coin = false;
                 mirror = false;
@@ -1263,6 +1279,66 @@ public class GeometryDashScript : MonoBehaviour
                 transformC = true;
                 orbs = true;
                 pads = false;
+            }
+        }
+        else if (rando > 65 && rando < 70)
+        {
+            Debug.LogFormat("[Geometry Dash #{0}] The chosen level is: Uprise", moduleId);
+            lvlname = "Uprise";
+            creators.Add("Blad3m");
+            creators.Add("Menkatjezzz");
+            verifier = "Ninetails";
+            difficulty = "Extreme Demon";
+            songname = "Uprise";
+            songmaker = "Envy";
+            Debug.LogFormat("[Geometry Dash #{0}] --------------------------------------------", moduleId);
+            if (rando == 66)
+            {
+                player.clip = useInternal ? internalClips[66] : VideoLoader.clips[66];
+                aud.clip = audios[66];
+                coin = false;
+                mirror = false;
+                speed = true;
+                teleport = false;
+                transformC = false;
+                orbs = true;
+                pads = true;
+            }
+            else if (rando == 67)
+            {
+                player.clip = useInternal ? internalClips[67] : VideoLoader.clips[67];
+                aud.clip = audios[67];
+                coin = false;
+                mirror = false;
+                speed = true;
+                teleport = false;
+                transformC = true;
+                orbs = true;
+                pads = true;
+            }
+            else if (rando == 68)
+            {
+                player.clip = useInternal ? internalClips[68] : VideoLoader.clips[68];
+                aud.clip = audios[68];
+                coin = false;
+                mirror = false;
+                speed = false;
+                teleport = false;
+                transformC = true;
+                orbs = true;
+                pads = true;
+            }
+            else if (rando == 69)
+            {
+                player.clip = useInternal ? internalClips[69] : VideoLoader.clips[69];
+                aud.clip = audios[69];
+                coin = false;
+                mirror = false;
+                speed = false;
+                teleport = true;
+                transformC = true;
+                orbs = true;
+                pads = true;
             }
         }
     }
@@ -1480,7 +1556,7 @@ public class GeometryDashScript : MonoBehaviour
 
     private void randomizeButtons()
     {
-        int rando = UnityEngine.Random.Range(0, 4);
+        int rando = Random.Range(0, 4);
         correctBut = rando;
         if (correctBut == 0)
         {
@@ -1488,19 +1564,19 @@ public class GeometryDashScript : MonoBehaviour
             int rand2 = correctCubeIndex-1;
             while (rand2+1 == correctCubeIndex)
             {
-                rand2 = UnityEngine.Random.Range(0, 20);
+                rand2 = Random.Range(0, 20);
                 icons[3].GetComponent<Image>().sprite = cubes[rand2];
             }
             int rand3 = correctCubeIndex - 1;
             while (rand3 + 1 == correctCubeIndex || rand3 == rand2)
             {
-                rand3 = UnityEngine.Random.Range(0, 20);
+                rand3 = Random.Range(0, 20);
                 icons[4].GetComponent<Image>().sprite = cubes[rand3];
             }
             int rand4 = correctCubeIndex - 1;
             while (rand4 + 1 == correctCubeIndex || rand4 == rand2 || rand4 == rand3)
             {
-                rand4 = UnityEngine.Random.Range(0, 20);
+                rand4 = Random.Range(0, 20);
                 icons[5].GetComponent<Image>().sprite = cubes[rand4];
             }
         }
@@ -1510,19 +1586,19 @@ public class GeometryDashScript : MonoBehaviour
             int rand2 = correctCubeIndex - 1;
             while (rand2 + 1 == correctCubeIndex)
             {
-                rand2 = UnityEngine.Random.Range(0, 20);
+                rand2 = Random.Range(0, 20);
                 icons[2].GetComponent<Image>().sprite = cubes[rand2];
             }
             int rand3 = correctCubeIndex - 1;
             while (rand3 + 1 == correctCubeIndex || rand3 == rand2)
             {
-                rand3 = UnityEngine.Random.Range(0, 20);
+                rand3 = Random.Range(0, 20);
                 icons[4].GetComponent<Image>().sprite = cubes[rand3];
             }
             int rand4 = correctCubeIndex - 1;
             while (rand4 + 1 == correctCubeIndex || rand4 == rand2 || rand4 == rand3)
             {
-                rand4 = UnityEngine.Random.Range(0, 20);
+                rand4 = Random.Range(0, 20);
                 icons[5].GetComponent<Image>().sprite = cubes[rand4];
             }
         }
@@ -1532,19 +1608,19 @@ public class GeometryDashScript : MonoBehaviour
             int rand2 = correctCubeIndex - 1;
             while (rand2 + 1 == correctCubeIndex)
             {
-                rand2 = UnityEngine.Random.Range(0, 20);
+                rand2 = Random.Range(0, 20);
                 icons[2].GetComponent<Image>().sprite = cubes[rand2];
             }
             int rand3 = correctCubeIndex - 1;
             while (rand3 + 1 == correctCubeIndex || rand3 == rand2)
             {
-                rand3 = UnityEngine.Random.Range(0, 20);
+                rand3 = Random.Range(0, 20);
                 icons[3].GetComponent<Image>().sprite = cubes[rand3];
             }
             int rand4 = correctCubeIndex - 1;
             while (rand4 + 1 == correctCubeIndex || rand4 == rand2 || rand4 == rand3)
             {
-                rand4 = UnityEngine.Random.Range(0, 20);
+                rand4 = Random.Range(0, 20);
                 icons[5].GetComponent<Image>().sprite = cubes[rand4];
             }
         }
@@ -1554,19 +1630,19 @@ public class GeometryDashScript : MonoBehaviour
             int rand2 = correctCubeIndex - 1;
             while (rand2 + 1 == correctCubeIndex)
             {
-                rand2 = UnityEngine.Random.Range(0, 20);
+                rand2 = Random.Range(0, 20);
                 icons[2].GetComponent<Image>().sprite = cubes[rand2];
             }
             int rand3 = correctCubeIndex - 1;
             while (rand3 + 1 == correctCubeIndex || rand3 == rand2)
             {
-                rand3 = UnityEngine.Random.Range(0, 20);
+                rand3 = Random.Range(0, 20);
                 icons[3].GetComponent<Image>().sprite = cubes[rand3];
             }
             int rand4 = correctCubeIndex - 1;
             while (rand4 + 1 == correctCubeIndex || rand4 == rand2 || rand4 == rand3)
             {
-                rand4 = UnityEngine.Random.Range(0, 20);
+                rand4 = Random.Range(0, 20);
                 icons[4].GetComponent<Image>().sprite = cubes[rand4];
             }
         }
@@ -1627,7 +1703,7 @@ public class GeometryDashScript : MonoBehaviour
     private IEnumerator end()
     {
         animating = true;
-        player.clip = VideoLoader.clips[VideoLoader.clips.Length-1];
+        player.clip = useInternal ? internalClips[internalClips.Length-1] : VideoLoader.clips[VideoLoader.clips.Length-1];
         audio.PlaySoundAtTransform("endStart_02", transform);
         for (int i = 0; i < 2; i++)
         {
@@ -1833,6 +1909,7 @@ public class GeometryDashScript : MonoBehaviour
 
     IEnumerator TwitchHandleForcedSolve()
     {
+        while (loading) { yield return true; yield return new WaitForSeconds(0.1f); }
         if (!started && !animating)
         {
             buttons[0].OnInteract();

@@ -13,12 +13,14 @@ public class VideoLoader : MonoBehaviour
 
     public void Awake()
     {
-        DestroyImmediate(GetComponent<KMService>());
+        if (!Application.isEditor)
+            DestroyImmediate(GetComponent<KMService>());
     }
 
     public void Start()
     {
-        StartCoroutine(LoadVideoClips());
+        if (!Application.isEditor)
+            StartCoroutine(LoadVideoClips());
     }
 
     private IEnumerator LoadVideoClips()
