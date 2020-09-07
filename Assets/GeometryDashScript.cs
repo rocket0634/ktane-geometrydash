@@ -77,7 +77,6 @@ public class GeometryDashScript : MonoBehaviour
         if (Application.isEditor)
         {
             useInternal = true;
-            loading = false;
         }
     }
 
@@ -106,6 +105,7 @@ public class GeometryDashScript : MonoBehaviour
             pickVideoAndStats();
             getNumber();
             randomizeButtons();
+            loading = false;
         }
     }
 
@@ -216,7 +216,7 @@ public class GeometryDashScript : MonoBehaviour
 
     private void pickVideoAndStats()
     {
-        int rando = Random.Range(0, useInternal ? internalClips.Length : VideoLoader.clips.Length);
+        int rando = Random.Range(0, useInternal ? (internalClips.Length - 1) : (VideoLoader.clips.Length - 1));
         if (rando > -1 && rando < 4)
         {
             Debug.LogFormat("[Geometry Dash #{0}] The chosen level is: Valor", moduleId);
