@@ -1659,23 +1659,27 @@ public class GeometryDashScript : MonoBehaviour
         animating = true;
         audio.PlaySoundAtTransform("playSound_01", transform);
         yield return new WaitForSeconds(1f);
-        float fadeOutTime = 2.0f;
-        Material originalMat = background.GetComponent<Renderer>().material;
+        float fadeOutTime = 0.5f;
+        Renderer backRend = background.GetComponent<Renderer>();
+        Material originalMat = new Material(backRend.material);
+        Material newMat = new Material(startBacks[0]);
         for (float t = 0.01f; t < fadeOutTime; t += Time.deltaTime)
         {
-            background.GetComponent<Renderer>().material.Lerp(originalMat, startBacks[0], Mathf.Min(1, t / fadeOutTime));
+            backRend.material.Lerp(originalMat, newMat, t / fadeOutTime);
             yield return null;
         }
+        yield return new WaitForSeconds(1.5f);
         player.Play();
         yield return new WaitForSeconds(.1f);
         aud.Play();
-        Material originalMat2 = background.GetComponent<Renderer>().material;
+        originalMat = new Material(backRend.material);
+        newMat = new Material(startBacks[1]);
         for (float t = 0.01f; t < fadeOutTime; t += Time.deltaTime)
         {
-            background.GetComponent<Renderer>().material.Lerp(originalMat2, startBacks[1], Mathf.Min(1, t / fadeOutTime));
+            backRend.material.Lerp(originalMat, newMat, t / fadeOutTime);
             yield return null;
         }
-        yield return new WaitForSeconds(9f);
+        yield return new WaitForSeconds(10.5f);
         player.Stop();
         for (int i = 0; i < 2; i++)
         {
